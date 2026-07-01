@@ -1,0 +1,19 @@
+INFO CandidateSync Started
+INFO Configuration Loaded
+INFO Reading Recruiter CSV
+INFO Recruiter CSV Parsed Successfully (3 Candidates)
+INFO Reading Resume Files
+INFO Resume Parsed Successfully
+INFO Creating Canonical Profiles
+INFO Normalizing Data
+INFO Merging Sources
+INFO Duplicate Detection Completed
+INFO Skills Canonicalized
+INFO Dates Normalized
+INFO Confidence Calculated
+INFO Projection Applied
+INFO Validation Successful
+INFO Output Saved
+INFO Statistics Saved
+INFO Conflict Report Saved
+INFO Finished Successfully

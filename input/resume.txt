@@ -1,0 +1,15 @@
+John Doe
+Senior Software Engineer
+Email: john.doe@example.com
+Phone: +1-415-555-0100
+Location: San Francisco, CA, USA
+Skills: Python Java SQL Docker Kubernetes AWS
+Experience
+Acme Corp
+Senior Software Engineer
+Jan 2020 - Present
+Worked on scalable backend systems and cloud infrastructure.
+Education
+Stanford University
+Bachelor of Science in Computer Science
+2019

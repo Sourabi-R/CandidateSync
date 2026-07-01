@@ -1,0 +1,23 @@
+{
+    "fields": [
+        {
+            "path": "candidate_name",
+            "from": "full_name"
+        },
+        {
+            "path": "primary_email",
+            "from": "emails[0]"
+        },
+        {
+            "path": "phone",
+            "from": "phones[0]"
+        },
+        {
+            "path": "experience",
+            "from": "years_experience"
+        }
+    ],
+    "include_confidence": true,
+    "include_provenance": false,
+    "on_missing": "null"
+}
