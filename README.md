@@ -1,301 +1,384 @@
-🚀 CandidateSync
-Multi-Source Candidate Data Transformer
+````md
+# 🚀 CandidateSync
 
-Python • CLI • JSON Configuration • Pydantic • Pytest
+## Multi-Source Candidate Data Transformer
 
-A production-ready candidate data transformation pipeline that consolidates fragmented candidate information from multiple structured and unstructured sources into a single canonical profile. The system performs normalization, deduplication, conflict resolution, confidence scoring, provenance tracking, and configurable output generation for downstream recruitment systems.
+**Python • CLI • JSON Configuration • Pydantic • Pytest**
 
-📌 Overview
+A production-ready candidate data transformation pipeline that consolidates fragmented candidate information from multiple structured and unstructured sources into a single canonical candidate profile.
 
-CandidateSync is designed to solve one of the biggest challenges in modern recruitment systems—combining candidate information from multiple sources into one reliable profile.
+---
 
-The pipeline ingests recruiter CSV exports and resume files, transforms them into a standardized schema, resolves conflicting information, tracks data provenance, assigns confidence scores, and generates validated JSON outputs that can be easily consumed by ATS and hiring platforms.
+# 📌 Overview
 
-The system helps organizations:
+CandidateSync was developed as part of the **Eightfold Engineering Internship Assignment**.
 
-📂 Consolidate candidate data from multiple sources
-🔄 Normalize inconsistent information
-👥 Merge duplicate candidate records
-⚖️ Resolve conflicting candidate details
-📊 Calculate confidence scores
-📍 Track provenance for every field
-⚙️ Generate configurable output using runtime JSON configuration
-✅ Produce schema-valid outputs for downstream systems
-✨ Features
-📂 Multi-Source Data Processing
-Structured Source
-Recruiter CSV Export
-Unstructured Source
-Resume (.txt)
-📋 Canonical Candidate Profile
+The system transforms recruiter CSV files and resume documents into a single canonical candidate profile by performing:
 
-Each candidate profile includes
+- 📂 Multi-source data ingestion
+- 🔄 Data normalization
+- 👥 Duplicate detection
+- ⚖️ Conflict resolution
+- 📊 Confidence calculation
+- 📍 Provenance tracking
+- ⚙️ Runtime configurable output
+- ✅ Schema validation
 
-Candidate ID
-Full Name
-Emails
-Phone Numbers
-Location
-Headline
-Current Company
-Current Title
-Years of Experience
-Experience History
-Education
-Skills
-Provenance
-Confidence Score
-🔄 Data Processing Pipeline
-Recruiter CSV
-Resume TXT
+---
+
+# ✨ Features
+
+## 📂 Multi-Source Input
+
+### Structured Sources
+
+- ✅ Recruiter CSV
+
+### Unstructured Sources
+
+- ✅ Resume (.txt)
+
+---
+
+## 📋 Canonical Candidate Profile
+
+Each generated profile contains:
+
+- Candidate ID
+- Full Name
+- Emails
+- Phone Numbers
+- Location
+- Headline
+- Current Company
+- Current Title
+- Years of Experience
+- Skills
+- Experience
+- Education
+- Provenance
+- Confidence Score
+
+---
+
+## 🔄 Processing Pipeline
+
+```text
+Recruiter CSV + Resume
         │
         ▼
- Data Extraction
+Data Extraction
         │
         ▼
- Data Parsing
+Data Parsing
         │
         ▼
- Canonical Mapping
+Canonical Mapping
         │
         ▼
- Data Normalization
+Normalization
         │
         ▼
- Merge Engine
+Merge Engine
         │
         ▼
- Conflict Resolution
+Conflict Resolution
         │
         ▼
- Confidence Calculation
+Confidence Calculation
         │
         ▼
- Runtime Projection
+Runtime Projection
         │
         ▼
- Schema Validation
+Schema Validation
         │
         ▼
- JSON Output Generation
-⚙️ Data Normalization
+JSON Output
+````
 
-CandidateSync automatically performs
+---
 
-📞 Phone Number Normalization (E.164)
-📅 Date Standardization (YYYY-MM)
-🧠 Canonical Skill Mapping
-📧 Email Validation
-🔁 Duplicate Removal
-📍 Location Normalization
-📑 Consistent Candidate Schema
-🔀 Merge & Conflict Resolution
+# ⚙️ Normalization
 
-Candidate records are matched using
+CandidateSync automatically performs:
 
-Email Address
-Phone Number
-Candidate Name
+* 📞 Phone Normalization (E.164)
+* 📅 Date Normalization (YYYY-MM)
+* 🧠 Skill Canonicalization
+* 📧 Email Validation
+* 🔁 Duplicate Removal
+* 📍 Location Standardization
 
-Conflict resolution uses predefined source-priority rules.
+---
 
-Candidate Field	Preferred Source
-Employment Details	Recruiter CSV
-Skills	Resume
-Contact Information	Recruiter CSV
+# 🔀 Merge Strategy
 
-Every populated field records
+Candidate records are matched using:
 
-Source
-Extraction Method
-Confidence
+* Email Address
+* Phone Number
+* Candidate Name
 
-ensuring complete explainability.
+Priority Rules:
 
-🎯 Runtime Configurable Output
+| Field           | Preferred Source |
+| --------------- | ---------------- |
+| Employment      | Recruiter CSV    |
+| Skills          | Resume           |
+| Contact Details | Recruiter CSV    |
 
-Without changing the application code, CandidateSync supports runtime JSON configurations to
+Every selected field records:
 
-Select output fields
-Rename fields
-Remap canonical attributes
-Enable / Disable Provenance
-Enable / Disable Confidence
-Configure Missing Value Handling
-Validate Output Schema
+* Source
+* Extraction Method
+* Confidence
 
-Example
+---
 
-{
-  "fields": [
-    {
-      "path": "candidate_name",
-      "from": "full_name"
-    },
-    {
-      "path": "primary_email",
-      "from": "emails[0]"
-    }
-  ]
-}
-📊 Pipeline Outputs
+# 🎯 Runtime Configurable Output
 
-The pipeline automatically generates
+The runtime JSON configuration supports:
 
-📄 candidate_profile.json
-📄 candidate_profiles.json
-📈 statistics.json
-🔁 duplicates.json
-⚠️ conflict_report.json
-📝 log.txt
-📊 Pipeline Summary
+* ✅ Select Fields
+* ✅ Rename Fields
+* ✅ Remap Canonical Paths
+* ✅ Toggle Provenance
+* ✅ Toggle Confidence
+* ✅ Missing Value Policy
+* ✅ Schema Validation
 
-After every successful execution
+---
 
-Candidates Processed : 3
+# 📊 Generated Outputs
 
-Canonical Profiles   : 3
+The pipeline generates:
 
-Duplicates Found     : 0
+* 📄 candidate_profile.json
+* 📄 candidate_profiles.json
+* 📈 statistics.json
+* 🔁 duplicates.json
+* ⚠️ conflict_report.json
+* 📝 log.txt
 
-Average Confidence   : 0.54
+---
 
-Execution Time       : 0.09 sec
-🏗️ System Architecture
-                 Recruiter CSV
-                        │
-                        ▼
-                 CSV Parser
-                        │
-                        ▼
-                  Resume TXT
-                        │
-                        ▼
-                 Resume Parser
-                        │
-        ┌───────────────┴───────────────┐
-        ▼                               ▼
- Canonical Mapper                 Normalization
-        │                               │
-        └───────────────┬───────────────┘
-                        ▼
-                  Merge Engine
-                        │
-                        ▼
-             Conflict Resolution
-                        │
-                        ▼
-           Confidence Calculator
-                        │
-                        ▼
-          Runtime JSON Projection
-                        │
-                        ▼
-             Schema Validation
-                        │
-                        ▼
-               JSON Output Files
-🛠 Technology Stack
-Backend
-Technology	Purpose
-Python	Core Development
-Pydantic	Data Validation
-JSON	Runtime Configuration
-CSV	Structured Input
-Logging	Pipeline Monitoring
-Pytest	Automated Testing
-Development Tools
-Technology	Purpose
-Git	Version Control
-GitHub	Repository Hosting
-VS Code	Development IDE
-📂 Project Structure
+# 🏗️ System Architecture
+
+```text
+Recruiter CSV        Resume TXT
+      │                   │
+      └────────┬──────────┘
+               ▼
+       Data Extraction
+               │
+               ▼
+      Canonical Mapping
+               │
+               ▼
+      Data Normalization
+               │
+               ▼
+         Merge Engine
+               │
+               ▼
+    Conflict Resolution
+               │
+               ▼
+    Confidence Assignment
+               │
+               ▼
+     Runtime Projection
+               │
+               ▼
+      Schema Validation
+               │
+               ▼
+      JSON Output Files
+```
+
+---
+
+# 🛠️ Technology Stack
+
+| Technology  | Purpose               |
+| ----------- | --------------------- |
+| Python 3.11 | Backend               |
+| Pydantic    | Validation            |
+| JSON        | Runtime Configuration |
+| CSV         | Structured Input      |
+| Logging     | Pipeline Monitoring   |
+| Pytest      | Automated Testing     |
+| Git         | Version Control       |
+| GitHub      | Repository Hosting    |
+
+---
+
+# 📂 Project Structure
+
+```text
 CandidateSync/
-│
+
 ├── config/
-│   ├── default_config.json
-│   └── custom_minimal_config.json
-│
 ├── docs/
-│   └── SourabiR_Email_Eightfold.pdf
-│
 ├── input/
-│   ├── sample_candidates.csv
-│   └── resume.txt
-│
 ├── output/
-│   ├── candidate_profile.json
-│   ├── candidate_profiles.json
-│   ├── statistics.json
-│   ├── duplicates.json
-│   ├── conflict_report.json
-│   └── log.txt
-│
+├── scripts/
 ├── src/
-│
 ├── tests/
-│
 ├── README.md
 ├── requirements.txt
 └── .gitignore
-🚀 Getting Started
-Clone Repository
+```
+
+---
+
+# 🚀 Getting Started
+
+## Clone Repository
+
+```bash
 git clone https://github.com/Sourabi-R/CandidateSync.git
 
 cd CandidateSync
-Create Virtual Environment
-python -m venv .venv
-Windows
-.venv\Scripts\activate
-macOS/Linux
-source .venv/bin/activate
-Install Dependencies
+```
+
+---
+
+## Create Virtual Environment
+
+### Windows
+
+```bash
+python -m venv .venv311
+
+.venv311\Scripts\activate
+```
+
+### macOS/Linux
+
+```bash
+python3 -m venv .venv311
+
+source .venv311/bin/activate
+```
+
+---
+
+## Install Dependencies
+
+```bash
 pip install -r requirements.txt
-▶️ Run the Pipeline
-Default Schema
+```
+
+---
+
+# ▶️ Run Pipeline
+
+### Default Output
+
+```bash
 python -m src.cli.main \
 --csv input/sample_candidates.csv \
 --resume input/resume.txt \
 --config config/default_config.json
-Custom Runtime Output
+```
+
+### Custom Output
+
+```bash
 python -m src.cli.main \
 --csv input/sample_candidates.csv \
 --resume input/resume.txt \
 --config config/custom_minimal_config.json
-🧪 Run Tests
-pytest
+```
+
+---
+
+# 🧪 Run Tests
+
+```bash
+pytest -q
+```
 
 Expected Output
 
-========================
-
+```text
 25 passed
+```
 
-========================
-⚠️ Edge Cases Handled
-Missing Resume
-Missing CSV
-Duplicate Candidates
-Invalid Phone Numbers
-Missing Emails
-Conflicting Candidate Information
-Empty Input Files
-Malformed Runtime Configuration
-🔮 Future Enhancements
-ATS JSON Integration
-GitHub Profile Parsing
-LinkedIn Profile Parsing
-PDF Resume Parsing
-DOCX Resume Support
-REST API Interface
-Web Dashboard
-AI-Based Entity Resolution
-Semantic Skill Matching
-Cloud Deployment
-👩‍💻 Author
+---
 
-Sourabi R
+# 📦 Output Files
 
-B.Tech – Artificial Intelligence & Data Science
+```text
+output/
 
-CandidateSync — Multi-Source Candidate Data Transformer 🚀
+candidate_profile.json
+
+candidate_profiles.json
+
+statistics.json
+
+duplicates.json
+
+conflict_report.json
+
+log.txt
+```
+
+---
+
+# 🎯 Assignment Coverage
+
+| Requirement         | Status |
+| ------------------- | ------ |
+| Structured Source   | ✅      |
+| Unstructured Source | ✅      |
+| Canonical Schema    | ✅      |
+| Runtime Config      | ✅      |
+| Normalization       | ✅      |
+| Merge Engine        | ✅      |
+| Conflict Resolution | ✅      |
+| Confidence          | ✅      |
+| Provenance          | ✅      |
+| Validation          | ✅      |
+| CLI                 | ✅      |
+| Reports             | ✅      |
+| Tests               | ✅      |
+
+---
+
+# 🔮 Future Enhancements
+
+* ATS JSON Support
+* LinkedIn Integration
+* GitHub Profile Integration
+* PDF Resume Parsing
+* DOCX Resume Parsing
+* Semantic Skill Matching
+* AI Entity Resolution
+* Web Dashboard
+* REST API
+* Cloud Deployment
+
+---
+
+# 👩‍💻 Author
+
+**Sourabi R**
+
+B.Tech Artificial Intelligence & Data Science
+
+**Eightfold Engineering Internship Assignment (Jul–Dec 2026)**
+
+---
+
+# ⭐ CandidateSync
+
+**A configurable, explainable and production-ready Multi-Source Candidate Data Transformation Pipeline.**
+
+```
+
+This structure is almost identical to the polished AI-HRMS README style and renders cleanly on GitHub with proper spacing, headings, tables, code blocks, and emojis.
+```
